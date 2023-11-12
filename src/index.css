@@ -1,13 +1,676 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Thin.ttf");
+  font-weight: 100;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-UltraLight.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Semibold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("./fonts/Gilroy-Extrabold.ttf");
+  font-weight: 800;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Gilroy, sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1140px;
+  width: 90%;
+}
+
+:root {
+  --black: #000;
+  --white: #fff;
+}
+
+/* Head */
+
+.head {
+  width: 100%;
+  height: 100vh;
+  background: url("https://thumb.tildacdn.com/tild3264-3630-4237-b466-646361313966/-/format/webp/image.png") no-repeat center / cover;
+  padding-top: 70px;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+.head .h2_center {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.head h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.head .header {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--black);
+}
+
+.head .burger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+
+.head .burger div {
+  width: 100%;
+  height: 4px;
+  background: var(--black);
+  margin-bottom: 5px;
+}
+
+.head .menu {
+  top: 0;
+  right: 0;
+  position: fixed;
+  width: 70%;
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+  font-size: 20px;
+  animation: frist .3s ease;
+  background: var(--white);
+  box-shadow: 5px 10px 15px var(--black);
+  z-index: 9999;
+}
+
+.head .menu_head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.head .menu_head .h2_center {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.head .head_contant {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.head .head_block {
+  margin-top: 30px;
+  margin-left: auto;
+  width: 80%;
+  height: 60vh;
+  background: url("https://thumb.tildacdn.com/tild6163-3830-4935-b739-636531326536/-/format/webp/_.png") no-repeat center / cover;
+}
+
+.head .head_image_one {}
+
+@keyframes frist {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 70%;
+  }
+}
+
+/* Catalog */
+
+.catalog {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.catalog .catalog_block {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.catalog .catalog_block .block {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.catalog .catalog_block .block .img {
+  width: 100%;
+  height: 60vh;
+  transition: 0.2s ease;
+}
+
+.catalog .catalog_block .block .img:hover {
+  transform: scale(1.05);
+}
+
+.catalog .content {
+  width: 100%;
+  height: 160px;
+}
+
+.content_h1 {
+  margin-top: 15px;
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.content_p {
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--black);
+}
+
+.content_price {
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--black);
+}
+
+.btns {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  font-size: 15px;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.button_form_detailed {
+  color: var(--white);
+  background: var(--black);
+  border: 1px solid var(--black);
+}
+
+.button_form_order {
+  color: var(--black);
+  background: var(--white);
+  border: 1px solid var(--black);
+}
+
+/* About */
+
+.about {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: url("https://thumb.tildacdn.com/tild3264-3630-4237-b466-646361313966/-/format/webp/image.png") no-repeat center / cover;
+}
+
+.about .about_block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.about .about_block div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.about .about_block img {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.about .about_block .absolute {
+  position: absolute;
+  width: 40%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.about .about_block .ul_form {
+  margin-top: 50px;
+}
+
+.about .about_block li,
+.about .about_block p {
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--black);
+}
+
+/* Delivery */
+
+.delivery {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 0;
+  background: url("https://thumb.tildacdn.com/tild3264-3630-4237-b466-646361313966/-/format/webp/image.png") no-repeat center / cover;
+}
+
+.delivery .delivery_grid {
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--black);
+}
+
+.delivery .delivery_grid .delivery_grin_one {
+  padding: 30px 40px;
+}
+
+.delivery .delivery_grid .delivery_grin_two {
+  padding: 30px 40px;
+  border-left: 1px solid var(--black);
+}
+
+.delivery .text_head {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--black);
+  text-align: center;
+}
+
+.delivery .text_header {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--black);
+  text-align: center;
+}
+
+.delivery .text_h2 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.delivery p {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  color: var(--black);
+}
+
+/* Contacts */
+
+.contacts {
+  width: 100%;
+  min-height: 300px;
+  padding: 100px 0;
+}
+
+.contacts .contacts_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.contacts .button_form_order.w {
+  height: 60px;
+  padding: 0 60px;
+  font-size: 20px;
+  font-weight: 500;
+  border: 1.5px solid var(--black);
+  border-radius: 10px;
+}
+
+.contacts .contacts_block p {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--black);
+  text-align: center;
+}
+
+/* Footer */
+
+.footer {
+  width: 100%;
+  background: #171717;
+}
+
+.footer .footer_block {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footer h1 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.footer a {
+  text-align: start;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.footer .icons {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+@media (max-width: 950px) {
+
+  /* Catalog */
+
+  .catalog .catalog_block {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+
+  /* Head */
+
+  .head .header {
+    grid-template-columns: 1fr;
+  }
+
+  .head .header h2 {
+    display: none;
+  }
+
+  .head .header .h2_center {
+    display: block;
+  }
+
+  .head .burger {
+    display: block;
+  }
+
+  .head {
+    height: 70vh;
+    padding-top: 20px;
+  }
+
+  .head .header {
+    padding: 15px 0;
+  }
+
+  .head .h2_center {
+    font-size: 30px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 650px) {
+  button {
+    font-weight: 500;
+    font-size: 14px;
+    height: 35px;
+    padding: 0 20px;
+  }
+
+  /* Head */
+
+  .head {
+    height: 50vh;
+    padding-top: 20px;
+  }
+
+  .head .header {
+    padding: 10px 0;
+  }
+
+  .head .h2_center {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+
+  .head .head_block {
+    margin-top: 30px;
+    margin-left: auto;
+    width: 80%;
+    height: 20vh;
+  }
+
+  .head .head_image_one {}
+
+  /* Catalog */
+
+  .catalog {
+    padding: 20px 0;
+  }
+
+  .catalog .catalog_block .block .img {
+    height: 35vh;
+  }
+
+  .catalog .catalog_block {
+    gap: 20px;
+  }
+
+  .catalog .catalog_block .block {
+    margin-bottom: 20px;
+  }
+
+  .catalog .content {
+    width: 100%;
+    height: 100px;
+  }
+
+  .content_h1 {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--black);
+  }
+
+  .content_p {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--black);
+  }
+
+  .content_price {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--black);
+  }
+
+  /* About */
+
+  .about .about_block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding: 15px;
+  }
+
+  .about .about_block img {
+    width: 70%;
+  }
+
+  .about .about_block li {
+    margin-left: 20px;
+  }
+
+  .about .about_block li {
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--black);
+  }
+
+  .about .about_block p {
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--black);
+    text-align: center;
+  }
+
+  /* Dilivery */
+
+  .delivery .delivery_grid .delivery_grin_one {
+    padding: 15px;
+  }
+
+  .delivery .delivery_grid .delivery_grin_two {
+    padding: 15px;
+  }
+
+  .delivery .text_head {
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--black);
+    text-align: center;
+  }
+
+  .delivery .text_header {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--black);
+    text-align: center;
+  }
+
+  .delivery .text_h2 {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .delivery p {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  /* Contacts */
+
+  .contacts {
+    padding: 50px 0;
+  }
+
+  .contacts .button_form_order.w {
+    height: 50px;
+    padding: 0 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1.5px solid var(--black);
+    border-radius: 10px;
+  }
+
+  .contacts .contacts_block p {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--black);
+    text-align: center;
+  }
+
+  /* Footer */
+
+  .footer h1 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .footer a {
+    text-align: start;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .footer .footer_block {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
 }

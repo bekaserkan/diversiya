@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Catalog from "./components/Catalog/Catalog";
+import Head from "./components/Head/Head";
+import axios from "axios";
+import About from "./components/About/About";
+import Delivery from "./components/Delivery/Delivery";
+import Contacts from "./components/Contacts/Contacts";
+import Footer from "./components/Footer/Footer";
 
 function App() {
+  const [catalog, setCatalog] = useState([]);
+
+  useEffect(() => {
+    axios.get('/data.json')
+      .then((response) => {
+        setCatalog(response.data);
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки данных:', error);
+      });
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Head />
+      <Catalog data={catalog} />
+      <About />
+      <Delivery />
+      <Contacts />
+      <Footer />
     </div>
   );
 }
