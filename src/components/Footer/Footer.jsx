@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="container">
                 <div className="footer_block">
                     <a href="">Политика конфедициальности</a>
-                    <h1>DIVERSIYA</h1>
+                    <h1>lUNAVI</h1>
                     <div className="icons">
                         <BsInstagram color="var(--white)" size={20} />
                         <BsWhatsapp color="var(--white)" size={20} />

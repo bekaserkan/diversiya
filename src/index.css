@@ -162,8 +162,6 @@ a {
   background: url("https://thumb.tildacdn.com/tild6163-3830-4935-b739-636531326536/-/format/webp/_.png") no-repeat center / cover;
 }
 
-.head .head_image_one {}
-
 @keyframes frist {
   0% {
     width: 0;
@@ -203,7 +201,7 @@ a {
   transform: scale(1.05);
 }
 
-.catalog .content {
+.content {
   width: 100%;
   height: 160px;
 }
@@ -434,6 +432,60 @@ button {
   justify-content: flex-end;
 }
 
+/* Order */
+
+.order {
+  width: 100%;
+  padding: 100px 0;
+}
+
+.order .order_block {
+  margin: 0 auto;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 50px;
+}
+
+.order .block {
+  width: 100%;
+}
+
+.order .slider {
+  width: 100%;
+}
+
+.order .order_block .image_order {
+  margin: 0 auto;
+  width: 80%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.flex_image {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.dots_image {
+  width: 60px;
+  height: 60px;
+  margin: 0 5px;
+}
+
+.slick-dots.slick-thumb {
+  width: 80%;
+  margin-top: 0px;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.arrow {
+  display: none;
+}
 
 @media (max-width: 950px) {
 
@@ -480,11 +532,37 @@ button {
 }
 
 @media (max-width: 650px) {
+  .close {
+    display: none;
+  }
+
+  .arrow {
+    display: block;
+  }
+
+  .btns {
+    gap: 15px;
+  }
+
   button {
     font-weight: 500;
     font-size: 14px;
     height: 35px;
-    padding: 0 20px;
+    padding: 20px 0;
+  }
+
+  .button_form_detailed {
+    width: 100%;
+    color: var(--white);
+    background: var(--black);
+    border: 1px solid var(--black);
+  }
+
+  .button_form_order {
+    width: 100%;
+    color: var(--black);
+    background: var(--white);
+    border: 1px solid var(--black);
   }
 
   /* Head */
@@ -503,15 +581,12 @@ button {
     font-weight: 500;
   }
 
-
   .head .head_block {
     margin-top: 30px;
     margin-left: auto;
     width: 80%;
     height: 20vh;
   }
-
-  .head .head_image_one {}
 
   /* Catalog */
 
@@ -531,9 +606,9 @@ button {
     margin-bottom: 20px;
   }
 
-  .catalog .content {
+  .content {
     width: 100%;
-    height: 100px;
+    height: 110px;
   }
 
   .content_h1 {
@@ -571,10 +646,8 @@ button {
   }
 
   .about .about_block li {
-    margin-left: 20px;
-  }
-
-  .about .about_block li {
+    margin: 0 auto;
+    width: 80%;
     line-height: 18px;
     font-size: 14px;
     font-weight: 400;
@@ -582,11 +655,12 @@ button {
   }
 
   .about .about_block p {
+    margin: 0 auto;
+    width: 80%;
     line-height: 18px;
     font-size: 14px;
     font-weight: 400;
     color: var(--black);
-    text-align: center;
   }
 
   /* Dilivery */
@@ -672,5 +746,25 @@ button {
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+  }
+
+  /* Order */
+
+  .order {
+    padding: 60px 0;
+  }
+
+  .order .order_block {
+    width: 100%;
+    grid-template-columns: 100%;
+  }
+
+  .order .block {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .order .order_block .image_order {
+    width: 100%;
   }
 }

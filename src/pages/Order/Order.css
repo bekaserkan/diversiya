@@ -1,0 +1,28 @@
+.header_order {
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    z-index: 9999;
+    background: transparent;
+}
+
+.header_order .header_order_block {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+    width: 90%;
+}
+
+@media (max-width: 650px) {
+    .header_order {
+        background: var(--white);
+    }
+
+    .header_order .header_order_block {
+        justify-content: flex-start;
+    }
+}

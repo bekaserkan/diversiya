@@ -11,7 +11,7 @@ const Head = () => {
         <div className="header">
           <a href="#catalog"><h2>Каталог</h2></a>
           <a href="#about"><h2>О нас</h2></a>
-          <a href="#head"><h2 className='h2_center'>DIVERSIYA</h2></a>
+          <a href="#head"><h2 className='h2_center'>lUNAVI</h2></a>
           <a href="#contacts"><h2>Контакты</h2></a>
           <a href="#delivery"><h2>Доставка</h2></a>
         </div>
@@ -22,7 +22,7 @@ const Head = () => {
         </div>
         {menu && <div className="menu">
           <div className='menu_head' >
-            <a href="#head"><h2 className='h2_center'>DIVERSIYA</h2></a>
+            <a href="#head"><h2 className='h2_center'>lUNAVI</h2></a>
             <GrClose className='icon' onClick={() => setMenu(false)} size={25} color='var(--black)' />
           </div>
           <a href="#catalog"><h2>Каталог</h2></a>

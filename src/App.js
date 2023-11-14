@@ -1,11 +1,10 @@
+import { Route, Routes } from "react-router-dom";
+import Main from "./pages/Main/Main";
+import Order from "./pages/Order/Order";
 import { useEffect, useState } from "react";
-import Catalog from "./components/Catalog/Catalog";
-import Head from "./components/Head/Head";
 import axios from "axios";
-import About from "./components/About/About";
-import Delivery from "./components/Delivery/Delivery";
-import Contacts from "./components/Contacts/Contacts";
-import Footer from "./components/Footer/Footer";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const [catalog, setCatalog] = useState([]);
@@ -22,12 +21,10 @@ function App() {
 
   return (
     <div className="App">
-      <Head />
-      <Catalog data={catalog} />
-      <About />
-      <Delivery />
-      <Contacts />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Main catalog={catalog} />} />
+        <Route path="order/:id" element={<Order catalog={catalog} />} />
+      </Routes>
     </div>
   );
 }
