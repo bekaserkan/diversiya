@@ -56,7 +56,7 @@
 .container {
   margin: 0 auto;
   max-width: 1140px;
-  width: 90%;
+  width: 80%;
 }
 
 :root {
@@ -243,7 +243,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 30px;
+  padding: 0 40px;
   font-size: 15px;
   font-weight: 600;
   box-sizing: border-box;
@@ -436,15 +436,16 @@ button {
 
 .order {
   width: 100%;
-  padding: 100px 0;
+  padding-top: 100px;
+  padding-bottom: 200px;
 }
 
 .order .order_block {
   margin: 0 auto;
-  width: 90%;
+  width: 80%;
   display: grid;
-  grid-template-columns: 50% 50%;
-  gap: 50px;
+  grid-template-columns: 49% 51%;
+  gap: 40px;
 }
 
 .order .block {
@@ -456,8 +457,6 @@ button {
 }
 
 .order .order_block .image_order {
-  margin: 0 auto;
-  width: 80%;
   height: 100vh;
   object-fit: cover;
   object-position: center;
@@ -476,15 +475,26 @@ button {
 }
 
 .slick-dots.slick-thumb {
-  width: 80%;
-  margin-top: 0px;
+  width: 100%;
   display: flex !important;
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
   gap: 20px;
 }
 
 .arrow {
   display: none;
+}
+
+.bag {
+  cursor: pointer;
+  position: fixed;
+  right: 5%;
+  bottom: 50px;
+  padding: 15px 25px;
+  border-radius: 3px;
+  box-shadow: 5px 5px 15px var(--black);
+  background: var(--white);
+  z-index: 99999;
 }
 
 @media (max-width: 950px) {
@@ -493,6 +503,28 @@ button {
 
   .catalog .catalog_block {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 835px) {
+  .button_form_detailed {
+    width: 100%;
+  }
+
+  .button_form_order {
+    width: 100%;
+  }
+
+
+  .btns {
+    gap: 15px;
+  }
+
+  button {
+    font-weight: 500;
+    font-size: 14px;
+    height: 35px;
+    padding: 20px 0;
   }
 }
 
@@ -538,31 +570,6 @@ button {
 
   .arrow {
     display: block;
-  }
-
-  .btns {
-    gap: 15px;
-  }
-
-  button {
-    font-weight: 500;
-    font-size: 14px;
-    height: 35px;
-    padding: 20px 0;
-  }
-
-  .button_form_detailed {
-    width: 100%;
-    color: var(--white);
-    background: var(--black);
-    border: 1px solid var(--black);
-  }
-
-  .button_form_order {
-    width: 100%;
-    color: var(--black);
-    background: var(--white);
-    border: 1px solid var(--black);
   }
 
   /* Head */

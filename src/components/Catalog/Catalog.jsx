@@ -14,9 +14,15 @@ const Catalog = ({ data }) => {
                         <div onClick={() => navigate(`/order/${el.uid}`)} key={id} className="block">
                             <Block el={el} />
                             <div className="content">
-                                <h1 className='content_h1'>{el.title}</h1>
+                                <h1 style={el.text.length > 70 ? {
+                                    height: "50px",
+                                    overflow: "hidden"
+                                } : {}} className='content_h1'>{el.title}</h1>
                                 {el.text ?
-                                    <p className='content_p' >
+                                    <p style={el.text.length > 120 ? {
+                                        height: "54px",
+                                        overflow: "hidden"
+                                    } : {}} className='content_p' >
                                         {React.createElement("p", {
                                             dangerouslySetInnerHTML: {
                                                 __html: el.text ? el.text : "",
@@ -40,7 +46,7 @@ const Catalog = ({ data }) => {
                     ))}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

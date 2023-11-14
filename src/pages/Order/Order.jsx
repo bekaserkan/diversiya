@@ -58,6 +58,12 @@ const Order = ({ catalog }) => {
                 <div className="block">
                     <div className="content">
                         <h1 className='content_h1'>{data.title}</h1>
+                        {data.price ?
+                            <p className='content_price'>{data.price} СОМ</p>
+                            : ""}
+                        <button style={{ marginTop: "20px" }} className='button_form_detailed'>
+                            В корзину
+                        </button>
                         {data.text ?
                             <p className='content_p' >
                                 {React.createElement("p", {
@@ -67,12 +73,6 @@ const Order = ({ catalog }) => {
                                 })}
                             </p>
                             : ""}
-                        {data.price ?
-                            <p className='content_price'>{data.price} СОМ</p>
-                            : ""}
-                        <button style={{ marginTop: "20px" }} className='button_form_detailed'>
-                            В корзину
-                        </button>
                     </div>
                 </div>
             </div>

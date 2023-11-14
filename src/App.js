@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { GiShoppingCart } from "react-icons/gi"
 
 function App() {
   const [catalog, setCatalog] = useState([]);
@@ -21,6 +22,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className="bag">
+        <GiShoppingCart size={25} color='var(-black)' />
+      </div>
       <Routes>
         <Route path="/" element={<Main catalog={catalog} />} />
         <Route path="order/:id" element={<Order catalog={catalog} />} />
