@@ -4,11 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 import { BsArrowLeft } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch } from 'react-redux'
+import { setItemInCart } from '../../store/card/reducer'
 
 const Order = ({ catalog }) => {
     const [data, setData] = useState([])
     const { id } = useParams()
     const navigete = useNavigate()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (catalog && catalog.products) {
@@ -37,6 +40,10 @@ const Order = ({ catalog }) => {
         slidesToScroll: 1
     };
 
+    function Order (el) {
+        dispatch(setItemInCart(el))
+    }
+
     return (
         <div className='order'>
             <div className="header_order">
@@ -61,7 +68,7 @@ const Order = ({ catalog }) => {
                         {data.price ?
                             <p className='content_price'>{data.price} СОМ</p>
                             : ""}
-                        <button style={{ marginTop: "20px" }} className='button_form_detailed'>
+                        <button onClick={() => Order(data)} style={{ marginTop: "20px" }} className='button_form_detailed'>
                             В корзину
                         </button>
                         {data.text ?

@@ -11,12 +11,14 @@ const Block = ({ el }) => {
         setHovered(false);
     };
 
+    console.log(el.gallery[0].img);
+
     return (
         < div
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             className="img"
             style={{
-                background: `url(${hovered ? el.editions[0].img : el.editions[0].img}) no-repeat center / cover`
+                background: `url(${hovered ? el.gallery[1].img : el.gallery[0].img}) no-repeat center / cover`
             }}
         ></div >
     )

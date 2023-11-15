@@ -485,16 +485,134 @@ button {
   display: none;
 }
 
+/* bag */
+
 .bag {
   cursor: pointer;
   position: fixed;
-  right: 5%;
-  bottom: 50px;
-  padding: 15px 25px;
-  border-radius: 3px;
-  box-shadow: 5px 5px 15px var(--black);
+  width: 80px;
+  height: 80px;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3);
   background: var(--white);
   z-index: 99999;
+}
+
+.bag .bag_block {
+  position: relative;
+}
+
+.bag .icon_message {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 25px;
+  height: 25px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 50%;
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bag h1 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* Decor */
+
+.decor {
+  padding: 60px 0;
+}
+
+.decor h1 {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+
+.decor .cart_block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.decor .cart_block img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+}
+
+.decor .cart_block h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.decor .cart_block p {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.input_box {
+  width: 100%;
+  height: 100px;
+}
+
+.input_box input {
+  margin-top: 8px;
+  width: 100%;
+  height: 45px;
+  border-radius: 3px;
+  border: 1px solid;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.decor .div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.decor .div h1 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.decor button {
+  width: 100%;
+}
+
+.decor_block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 15px;
+}
+
+.decor .decor_list {
+  width: 100%;
+  max-height: 400px;
+  overflow-x: hidden;
 }
 
 @media (max-width: 950px) {
@@ -564,6 +682,10 @@ button {
 }
 
 @media (max-width: 650px) {
+  .container {
+    width: 90%;
+  }
+
   .close {
     display: none;
   }
@@ -773,5 +895,13 @@ button {
 
   .order .order_block .image_order {
     width: 100%;
+  }
+
+  /* Decor */
+
+  .decor_block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 }

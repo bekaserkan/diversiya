@@ -40,6 +40,7 @@
     }
 
     .header_order .header_order_block {
+        width: 90%;
         justify-content: flex-start;
     }
 }
