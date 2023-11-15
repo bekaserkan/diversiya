@@ -437,7 +437,6 @@ button {
 .order {
   width: 100%;
   padding-top: 100px;
-  padding-bottom: 200px;
 }
 
 .order .order_block {
@@ -446,6 +445,7 @@ button {
   display: grid;
   grid-template-columns: 49% 51%;
   gap: 40px;
+  padding-bottom: 60px;
 }
 
 .order .block {

@@ -32,7 +32,7 @@ const Order = ({ catalog }) => {
                 </a>
             );
         },
-        dots: true,
+        dots: false,
         dotsClass: "slick-dots slick-thumb",
         infinite: true,
         speed: 500,

@@ -11,8 +11,6 @@ const Block = ({ el }) => {
         setHovered(false);
     };
 
-    console.log(el.gallery[0].img);
-
     return (
         < div
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}

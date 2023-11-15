@@ -1,4 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "card",
@@ -7,41 +7,30 @@ const cartSlice = createSlice({
   },
   reducers: {
     setItemInCart: (state, action) => {
-      const existingItem = state.itemsInCart.find(
-        (item) => item.id === action.payload.id
-      );
-
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        state.itemsInCart.push({ ...action.payload, quantity: 1 });
-      }
+      const newItem = { ...action.payload, quantity: 1 };
+      state.itemsInCart.push(newItem);
     },
     deleteItemFromCart: (state, action) => {
       state.itemsInCart = state.itemsInCart.filter(
-        (item) => item.id !== action.payload
+        (game) => game.uid !== action.payload
       );
     },
     deleteItemFrom: (state, action) => {
       state.itemsInCart = action.payload;
     },
-    incrementQuantity: (state, action) => {
-      const existingItem = state.itemsInCart.find(
-        (item) => item.id === action.payload
+    incrementItemQuantity: (state, action) => {
+      const { uid } = action.payload;
+      const updatedItems = state.itemsInCart.map((item) =>
+        item.uid === uid ? { ...item, quantity: item.quantity + 1 } : item
       );
-
-      if (existingItem) {
-        existingItem.quantity += 1;
-      }
+      state.itemsInCart = updatedItems;
     },
-    decrementQuantity: (state, action) => {
-      const existingItem = state.itemsInCart.find(
-        (item) => item.id === action.payload
+    decrementItemQuantity: (state, action) => {
+      const { uid } = action.payload;
+      const updatedItems = state.itemsInCart.map((item) =>
+        item.uid === uid && item.quantity > 0 ? { ...item, quantity: item.quantity - 1 } : item
       );
-
-      if (existingItem && existingItem.quantity > 1) {
-        existingItem.quantity -= 1;
-      }
+      state.itemsInCart = updatedItems;
     },
   },
 });
@@ -50,7 +39,8 @@ export const {
   setItemInCart,
   deleteItemFromCart,
   deleteItemFrom,
-  incrementQuantity,
-  decrementQuantity,
+  incrementItemQuantity,
+  decrementItemQuantity,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;

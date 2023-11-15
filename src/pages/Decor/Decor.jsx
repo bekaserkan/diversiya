@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsArrowLeft } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { calcTotalPrice } from '../../components/utils/utils';
-import { decrementQuantity, incrementQuantity } from '../../store/card/reducer';
+import {
+    incrementItemQuantity,
+    decrementItemQuantity,
+} from '../../store/card/reducer';
 
 const Decor = () => {
     const items = useSelector((state) => state.cart.itemsInCart);
@@ -12,13 +15,25 @@ const Decor = () => {
     const navigate = useNavigate();
     const totalPrice = calcTotalPrice(items);
 
+    const [localQuantities, setLocalQuantities] = useState({});
+
     const handleIncrement = (id) => {
-        dispatch(incrementQuantity(id));
+        setLocalQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [id]: (prevQuantities[id] || 0) + 1,
+        }));
+        dispatch(incrementItemQuantity(id));
     };
 
     const handleDecrement = (id) => {
-        dispatch(decrementQuantity(id));
+        setLocalQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [id]: Math.max((prevQuantities[id] || 0) - 1, 0),
+        }));
+        dispatch(decrementItemQuantity(id));
     };
+
+    console.log(items);
 
     return (
         <div className='decor'>
@@ -49,11 +64,11 @@ const Decor = () => {
                                         )}
                                     </div>
                                     <div className="count">
-                                        <div className="plus" onClick={() => handleIncrement(el.id)}>
+                                        <div className="plus" onClick={() => handleIncrement(el.uid)}>
                                             +
                                         </div>
-                                        <p>{el.quantity}</p>
-                                        <div className="minus" onClick={() => handleDecrement(el.id)}>
+                                        <p>{localQuantities[el.uid] || 0}</p>
+                                        <div className="minus" onClick={() => handleDecrement(el.uid)}>
                                             -
                                         </div>
                                     </div>
