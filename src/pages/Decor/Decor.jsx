@@ -4,36 +4,38 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { calcTotalPrice } from '../../components/utils/utils';
-import {
-    incrementItemQuantity,
-    decrementItemQuantity,
-} from '../../store/card/reducer';
+import { deleteItemFromCart, setItemInCart, } from '../../store/card/reducer';
 
 const Decor = () => {
     const items = useSelector((state) => state.cart.itemsInCart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const totalPrice = calcTotalPrice(items);
-
     const [localQuantities, setLocalQuantities] = useState({});
 
     const handleIncrement = (id) => {
         setLocalQuantities((prevQuantities) => ({
             ...prevQuantities,
-            [id]: (prevQuantities[id] || 0) + 1,
+            [id]: (prevQuantities[id] || 1) + 1,
         }));
-        dispatch(incrementItemQuantity(id));
     };
 
     const handleDecrement = (id) => {
-        setLocalQuantities((prevQuantities) => ({
-            ...prevQuantities,
-            [id]: Math.max((prevQuantities[id] || 0) - 1, 0),
-        }));
-        dispatch(decrementItemQuantity(id));
+        setLocalQuantities((prevQuantities) => {
+            const updatedQuantities = {
+                ...prevQuantities,
+                [id]: Math.max((prevQuantities[id] || 0) - 1, 0),
+            };
+
+            if (updatedQuantities[id] === 0) {
+                delete updatedQuantities[id];
+                dispatch(deleteItemFromCart(id));
+            }
+
+            return updatedQuantities;
+        });
     };
 
-    console.log(items);
 
     return (
         <div className='decor'>
@@ -67,7 +69,7 @@ const Decor = () => {
                                         <div className="plus" onClick={() => handleIncrement(el.uid)}>
                                             +
                                         </div>
-                                        <p>{localQuantities[el.uid] || 0}</p>
+                                        <p>{localQuantities[el.uid] || 1}</p>
                                         <div className="minus" onClick={() => handleDecrement(el.uid)}>
                                             -
                                         </div>

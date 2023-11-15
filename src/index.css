@@ -563,6 +563,7 @@ button {
   font-size: 18px;
   font-weight: 500;
   color: var(--black);
+  line-height: 1;
 }
 
 .decor .cart_block p {
@@ -596,6 +597,7 @@ button {
 .decor .div h1 {
   font-size: 20px;
   font-weight: 500;
+  color: var(--black);
 }
 
 .decor button {
@@ -614,6 +616,35 @@ button {
   max-height: 400px;
   overflow-x: hidden;
 }
+
+.decor .count {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.decor .count p {
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.decor .count div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: var(--white);
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
 
 @media (max-width: 950px) {
 
@@ -799,7 +830,7 @@ button {
   }
 
   .delivery .delivery_grid .delivery_grin_two {
-    padding: 15px;
+    padding: 10px;
   }
 
   .delivery .text_head {

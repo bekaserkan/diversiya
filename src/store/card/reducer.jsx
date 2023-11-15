@@ -18,20 +18,6 @@ const cartSlice = createSlice({
     deleteItemFrom: (state, action) => {
       state.itemsInCart = action.payload;
     },
-    incrementItemQuantity: (state, action) => {
-      const { uid } = action.payload;
-      const updatedItems = state.itemsInCart.map((item) =>
-        item.uid === uid ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      state.itemsInCart = updatedItems;
-    },
-    decrementItemQuantity: (state, action) => {
-      const { uid } = action.payload;
-      const updatedItems = state.itemsInCart.map((item) =>
-        item.uid === uid && item.quantity > 0 ? { ...item, quantity: item.quantity - 1 } : item
-      );
-      state.itemsInCart = updatedItems;
-    },
   },
 });
 
@@ -39,8 +25,6 @@ export const {
   setItemInCart,
   deleteItemFromCart,
   deleteItemFrom,
-  incrementItemQuantity,
-  decrementItemQuantity,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
