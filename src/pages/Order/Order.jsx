@@ -13,7 +13,7 @@ const Order = ({ catalog }) => {
     const navigete = useNavigate()
     const dispatch = useDispatch()
     const items = useSelector((state) => state.cart.itemsInCart);
-    
+    const [btn, setBtn] = useState(false)
 
     useEffect(() => {
         if (catalog && catalog.products) {
@@ -35,12 +35,22 @@ const Order = ({ catalog }) => {
             );
         },
         dots: false,
+        arrows: false,
         dotsClass: "slick-dots slick-thumb",
         infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1
     };
+
+    useEffect(() => {
+        const existingItem = items.find((obj) => obj.uid === data.uid);
+        if (existingItem) {
+            setBtn(false)
+        } else {
+            setBtn(true)
+        }
+    }, [items])
 
     function Order() {
         const existingItem = items.find((obj) => obj.uid === data.uid);
@@ -76,9 +86,14 @@ const Order = ({ catalog }) => {
                         {data.price ?
                             <p className='content_price'>{data.price} СОМ</p>
                             : ""}
-                        <button onClick={Order} style={{ marginTop: "20px" }} className='button_form_detailed'>
-                            В корзину
-                        </button>
+                        {btn ?
+                            <button onClick={Order} style={{ marginTop: "20px" }} className='button_form_detailed'>
+                                В корзину
+                            </button> :
+                            <button onClick={Order} style={{ marginTop: "20px" }} className='button_form_order'>
+                                Удалить из корзины
+                            </button>
+                        }
                         {data.text ?
                             <p className='content_p' >
                                 {React.createElement("p", {

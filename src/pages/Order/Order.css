@@ -8,6 +8,7 @@
     height: 60px;
     z-index: 9999;
     background: transparent;
+    animation: diggi .3s ease;
 }
 
 .header_order .header_order_block {
@@ -27,7 +28,7 @@
     font-size: 22px;
 }
 
-.order .content_p{
+.order .content_p {
     margin-top: 25px;
     font-size: 15px;
     font-weight: 200;

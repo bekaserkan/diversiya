@@ -247,6 +247,17 @@ button {
   font-size: 15px;
   font-weight: 600;
   box-sizing: border-box;
+  animation: btn .2s ease;
+}
+
+@keyframes btn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .button_form_detailed {
@@ -437,6 +448,7 @@ button {
 .order {
   width: 100%;
   padding-top: 100px;
+  animation: diggi .3s ease;
 }
 
 .order .order_block {
@@ -534,6 +546,7 @@ button {
 
 .decor {
   padding: 60px 0;
+  animation: diggi .3s ease;
 }
 
 .decor h1 {
@@ -713,6 +726,19 @@ button {
 }
 
 @media (max-width: 650px) {
+
+  @keyframes diggi {
+    0% {
+      margin-left: 100%;
+      opacity: 0;
+    }
+
+    100% {
+      margin-left: 0;
+      opacity: 1;
+    }
+  }
+
   .container {
     width: 90%;
   }
