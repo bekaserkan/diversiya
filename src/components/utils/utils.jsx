@@ -1,6 +1,9 @@
-export const calcTotalPrice = (items) => {
-  const total = items.reduce((acc, game) => {
-    return acc + parseFloat(game.price == null ? 0 : game.price); // Convert to number
+export const calcTotalPrice = (items, localQuantities) => {
+  const total = items.reduce((acc, item) => {
+    const quantity = localQuantities[item.uid] || 1;
+    const itemPrice = parseFloat(item.price) || 0; 
+
+    return acc + quantity * itemPrice;
   }, 0);
 
   return total;

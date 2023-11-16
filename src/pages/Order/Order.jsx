@@ -44,13 +44,16 @@ const Order = ({ catalog }) => {
     };
 
     useEffect(() => {
-        const existingItem = items.find((obj) => obj.uid === data.uid);
-        if (existingItem) {
-            setBtn(false)
-        } else {
-            setBtn(true)
+        if (data) {
+            const exists = items.some(obj => obj.uid === data.uid);
+
+            if (exists) {
+                setBtn(false)
+            } else {
+                setBtn(true)
+            }
         }
-    }, [items])
+    }, [items, data])
 
     function Order() {
         const existingItem = items.find((obj) => obj.uid === data.uid);

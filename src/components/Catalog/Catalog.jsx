@@ -14,7 +14,7 @@ const Catalog = ({ data }) => {
                         <div onClick={() => navigate(`/order/${el.uid}`)} key={id} className="block">
                             <Block el={el} />
                             <div className="content">
-                                <h1 style={el.text.length > 70 ? {
+                                <h1 style={el.text.title > 70 ? {
                                     height: "50px",
                                     overflow: "hidden"
                                 } : {}} className='content_h1'>{el.title}</h1>

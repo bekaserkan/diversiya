@@ -7,13 +7,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GiShoppingCart } from "react-icons/gi"
 import { useSelector } from "react-redux";
-import { calcTotalPrice } from "./components/utils/utils";
 import Decor from "./pages/Decor/Decor";
 
 function App() {
   const [catalog, setCatalog] = useState([]);
   const items = useSelector((state) => state.cart.itemsInCart);
-  const totalPrice = calcTotalPrice(items);
+  const [localQuantities, setLocalQuantities] = useState({});
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -44,7 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main catalog={catalog} />} />
         <Route path="order/:id" element={<Order catalog={catalog} />} />
-        <Route path="decor" element={<Decor items={items} />} />
+        <Route path="decor" element={<Decor items={items} localQuantities={localQuantities} setLocalQuantities={setLocalQuantities} />} />
       </Routes>
     </div>
   );

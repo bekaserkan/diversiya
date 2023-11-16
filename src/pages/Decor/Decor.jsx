@@ -1,24 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsArrowLeft } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { calcTotalPrice } from '../../components/utils/utils';
-import { deleteItemFromCart, setItemInCart, } from '../../store/card/reducer';
+import { deleteItemFromCart } from '../../store/card/reducer';
+import axios from 'axios';
 
-const Decor = () => {
+const Decor = ({ localQuantities, setLocalQuantities }) => {
     const items = useSelector((state) => state.cart.itemsInCart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const totalPrice = calcTotalPrice(items);
-    const [localQuantities, setLocalQuantities] = useState({});
+    const [totalPrice, setTotalPrice] = useState(calcTotalPrice(items, localQuantities));
+
+    useEffect(() => {
+        setTotalPrice(calcTotalPrice(items, localQuantities));
+    }, [items, localQuantities]);
 
     const handleIncrement = (id) => {
-        setLocalQuantities((prevQuantities) => ({
-            ...prevQuantities,
-            [id]: (prevQuantities[id] || 1) + 1,
-        }));
+        setLocalQuantities((prevQuantities) => {
+            const currentQuantity = prevQuantities[id] || 0;
+            const updatedQuantities = {
+                ...prevQuantities,
+                [id]: currentQuantity + 1,
+            };
+
+            return updatedQuantities;
+        });
     };
+
+    useEffect(() => {
+        handleIncrement()
+    }, [])
 
     const handleDecrement = (id) => {
         setLocalQuantities((prevQuantities) => {
@@ -28,6 +41,7 @@ const Decor = () => {
             };
 
             if (updatedQuantities[id] === 0) {
+                // Remove the item from the quantities if the quantity becomes 0
                 delete updatedQuantities[id];
                 dispatch(deleteItemFromCart(id));
             }
@@ -36,6 +50,17 @@ const Decor = () => {
         });
     };
 
+    const handleOrder = () => {
+        const orderData = Object.entries(localQuantities).map(([uid, quantity]) => ({ uid, quantity }));
+
+        axios.post('/', orderData)
+            .then(response => {
+                console.log('Order placed successfully:', response.data);
+            })
+            .catch(error => {
+                console.error('Error placing order:', error);
+            });
+    };
 
     return (
         <div className='decor'>
@@ -69,7 +94,7 @@ const Decor = () => {
                                         <div className="plus" onClick={() => handleIncrement(el.uid)}>
                                             +
                                         </div>
-                                        <p>{localQuantities[el.uid] || 1}</p>
+                                        <p>{localQuantities[el.uid] || 0}</p>
                                         <div className="minus" onClick={() => handleDecrement(el.uid)}>
                                             -
                                         </div>
@@ -92,11 +117,17 @@ const Decor = () => {
                 </div>
                 <div className="div">
                     <h1>Итог:</h1>
-                    {totalPrice > 0 ?
+                    {totalPrice > 0 ? (
                         <h1>{totalPrice} СОМ</h1>
-                        : ""}
+                    ) : (
+                        <p>Ваша корзина пуста</p>
+                    )}
                 </div>
-                <button className='button_form_detailed'>
+                <button
+                    disabled={totalPrice > 0 ? false : true}
+                    onClick={handleOrder}
+                    className='button_form_detailed'
+                >
                     Заказать
                 </button>
             </div>
@@ -104,4 +135,5 @@ const Decor = () => {
     );
 }
 
-export default Decor;
+// Memoize the Decor component to prevent unnecessary re-renders
+export default React.memo(Decor);
