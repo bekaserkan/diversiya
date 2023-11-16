@@ -6,17 +6,26 @@ import Catalog from '../../components/Catalog/Catalog';
 import About from '../../components/About/About';
 import Delivery from '../../components/Delivery/Delivery';
 import Contacts from '../../components/Contacts/Contacts';
+import Loading from '../../components/UI/Loading/Loading';
 
-const Main = ({ catalog }) => {
+const Main = ({ catalog, loading }) => {
 
     return (
         <div className='main'>
-            <Head />
-            <Catalog data={catalog} />
-            <About />
-            <Delivery />
-            <Contacts />
-            <Footer />
+            {loading ?
+                <div className="loading_div">
+                    <Loading />
+                </div>
+                :
+                <>
+                    <Head />
+                    <Catalog data={catalog} />
+                    <About />
+                    <Delivery />
+                    <Contacts />
+                    <Footer />
+                </>
+            }
         </div>
     )
 }

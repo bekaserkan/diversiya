@@ -16,7 +16,7 @@ const Block = ({ el }) => {
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             className="img"
             style={{
-                background: `url(${hovered ? el.gallery[1].img : el.gallery[0].img}) no-repeat center / cover`
+                background: `url(${hovered ? el.image[1].img : el.image[0].img}) no-repeat center / cover`
             }}
         ></div >
     )

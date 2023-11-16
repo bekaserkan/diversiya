@@ -8,30 +8,34 @@ import "slick-carousel/slick/slick-theme.css";
 import { GiShoppingCart } from "react-icons/gi"
 import { useSelector } from "react-redux";
 import Decor from "./pages/Decor/Decor";
+import { url } from "./Api";
 
 function App() {
   const [catalog, setCatalog] = useState([]);
   const items = useSelector((state) => state.cart.itemsInCart);
   const [localQuantities, setLocalQuantities] = useState({});
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     localStorage.setItem("array", items)
   }, [items])
 
   useEffect(() => {
-    axios.get('/data.json')
+    setLoading(true)
+    axios.get(url + "/product/list/")
       .then((response) => {
         setCatalog(response.data);
+        setLoading(false)
       })
       .catch((error) => {
         console.error('Ошибка загрузки данных:', error);
+        setLoading(false)
       });
   }, [])
 
   return (
     <div className="App">
-      {/* <div style={{ width: "80%", height: "50vh", background: "#fff", position: "fixed", top: 100, left: "10%", fontSize: "30px", fontWeight: 400, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 99999 }} >Сайкал ❤</div> */}
       <div onClick={() => navigate("/decor")} className="bag">
         <div className="bag_block">
           <GiShoppingCart size={35} color='var(-black)' />
@@ -41,7 +45,7 @@ function App() {
         </div>
       </div>
       <Routes>
-        <Route path="/" element={<Main catalog={catalog} />} />
+        <Route path="/" element={<Main catalog={catalog} loading={loading} />} />
         <Route path="order/:id" element={<Order catalog={catalog} />} />
         <Route path="decor" element={<Decor items={items} localQuantities={localQuantities} setLocalQuantities={setLocalQuantities} />} />
       </Routes>

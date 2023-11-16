@@ -29,10 +29,6 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
         });
     };
 
-    useEffect(() => {
-        handleIncrement()
-    }, [])
-
     const handleDecrement = (id) => {
         setLocalQuantities((prevQuantities) => {
             const updatedQuantities = {
@@ -41,7 +37,6 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
             };
 
             if (updatedQuantities[id] === 0) {
-                // Remove the item from the quantities if the quantity becomes 0
                 delete updatedQuantities[id];
                 dispatch(deleteItemFromCart(id));
             }
@@ -51,7 +46,7 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
     };
 
     const handleOrder = () => {
-        const orderData = Object.entries(localQuantities).map(([uid, quantity]) => ({ uid, quantity }));
+        const orderData = Object.entries(localQuantities).map(([id, quantity]) => ({ id, quantity }));
 
         axios.post('/', orderData)
             .then(response => {
@@ -78,7 +73,7 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
                             {items.map((el) => (
                                 <div className="cart_block" key={el.id}>
                                     <div>
-                                        <img src={el.editions[0].img} alt="" />
+                                        <img src={el.image && el.image[0].img} alt="" />
                                     </div>
                                     <div>
                                         <h2>{el.title}</h2>
@@ -91,11 +86,11 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
                                         )}
                                     </div>
                                     <div className="count">
-                                        <div className="plus" onClick={() => handleIncrement(el.uid)}>
+                                        <div className="plus" onClick={() => handleIncrement(el.id)}>
                                             +
                                         </div>
-                                        <p>{localQuantities[el.uid] || 0}</p>
-                                        <div className="minus" onClick={() => handleDecrement(el.uid)}>
+                                        <p>{localQuantities[el.id] || 0}</p>
+                                        <div className="minus" onClick={() => handleDecrement(el.id)}>
                                             -
                                         </div>
                                     </div>

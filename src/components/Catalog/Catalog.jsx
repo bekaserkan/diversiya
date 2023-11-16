@@ -6,26 +6,28 @@ import { useNavigate } from 'react-router-dom'
 const Catalog = ({ data }) => {
     const navigate = useNavigate()
 
+    console.log(data);
+
     return (
         <div className='catalog' id='catalog'>
             <div className="container">
                 <div className="catalog_block">
-                    {data && data.products && data.products.map((el, id) => (
-                        <div onClick={() => navigate(`/order/${el.uid}`)} key={id} className="block">
+                    {data && data.map((el, id) => (
+                        <div onClick={() => navigate(`/order/${el.id}`)} key={id} className="block">
                             <Block el={el} />
                             <div className="content">
-                                <h1 style={el.text.title > 70 ? {
-                                    height: "50px",
+                                <h1 style={el.title.length > 30 ? {
+                                    height: "40px",
                                     overflow: "hidden"
                                 } : {}} className='content_h1'>{el.title}</h1>
-                                {el.text ?
-                                    <p style={el.text.length > 120 ? {
+                                {el.textile ?
+                                    <p style={el.textile.length > 120 ? {
                                         height: "54px",
                                         overflow: "hidden"
                                     } : {}} className='content_p' >
                                         {React.createElement("p", {
                                             dangerouslySetInnerHTML: {
-                                                __html: el.text ? el.text : "",
+                                                __html: el.textile ? el.textile : "",
                                             },
                                         })}
                                     </p>
