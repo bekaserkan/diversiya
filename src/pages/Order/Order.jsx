@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 import { BsArrowLeft } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteItemFromCart, setItemInCart } from '../../store/card/reducer'
+import { setItemInCart } from '../../store/card/reducer'
 import axios from 'axios'
 import { url } from '../../Api'
 import Loading from '../../components/UI/Loading/Loading'
@@ -16,7 +16,6 @@ const Order = () => {
     const navigete = useNavigate()
     const dispatch = useDispatch()
     const items = useSelector((state) => state.cart.itemsInCart);
-    const [btn, setBtn] = useState(false)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -53,23 +52,11 @@ const Order = () => {
         slidesToScroll: 1
     };
 
-    useEffect(() => {
-        if (data) {
-            const exists = items.some(obj => obj.id === data.id);
-
-            if (exists) {
-                setBtn(false)
-            } else {
-                setBtn(true)
-            }
-        }
-    }, [items, data])
-
     function Order() {
         const existingItem = items.find((obj) => obj.id === data.id);
 
         if (existingItem) {
-            dispatch(deleteItemFromCart(data.id));
+            
         } else {
             dispatch(setItemInCart(data));
         }
@@ -105,14 +92,9 @@ const Order = () => {
                                 {data.price ?
                                     <p className='content_price'>{data.price} СОМ</p>
                                     : ""}
-                                {btn ?
-                                    <button onClick={Order} style={{ marginTop: "20px" }} className='button_form_detailed'>
-                                        В корзину
-                                    </button> :
-                                    <button onClick={Order} style={{ marginTop: "20px" }} className='button_form_order'>
-                                        Удалить из корзины
-                                    </button>
-                                }
+                                <button onClick={Order} style={{ marginTop: "20px" }} className='button_form_detailed'>
+                                    В корзину
+                                </button>
                                 {data.textile ?
                                     <p className='content_p' >
                                         {React.createElement("p", {
