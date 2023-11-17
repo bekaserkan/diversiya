@@ -4,41 +4,66 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { calcTotalPrice } from '../../components/utils/utils';
-import { deleteItemFromCart } from '../../store/card/reducer';
+import { deleteItemFrom, deleteItemFromCart } from '../../store/card/reducer';
 import axios from 'axios';
+import { url } from '../../Api';
+import Loading from '../../components/UI/Loading/Loading';
 
-const Decor = ({ localQuantities, setLocalQuantities }) => {
+const Decor = () => {
     const items = useSelector((state) => state.cart.itemsInCart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [totalPrice, setTotalPrice] = useState(calcTotalPrice(items, localQuantities));
+    const [totalPrice, setTotalPrice] = useState();
+    const [loading, setLoading] = useState(false);
+    const [decor, setDecor] = useState({
+        name: "",
+        phone: ""
+    });
+
+    const [decorVisablet, setDecorVisablet] = useState({
+        nameVisablet: false,
+        phoneVisablet: false
+    });
+
+    const [localQuantities, setLocalQuantities] = useState({})
 
     useEffect(() => {
-        setTotalPrice(calcTotalPrice(items, localQuantities));
+        const newTotalPrice = items.reduce((total, el) => {
+            const quantity = localQuantities[el.id] || 0;
+            return total + el.price * quantity;
+        }, 0);
+
+        setTotalPrice(newTotalPrice);
     }, [items, localQuantities]);
 
-    const handleIncrement = (id) => {
-        setLocalQuantities((prevQuantities) => {
-            const currentQuantity = prevQuantities[id] || 0;
-            const updatedQuantities = {
-                ...prevQuantities,
-                [id]: currentQuantity + 1,
-            };
+    useEffect(() => {
+        const newItems = items.filter((el) => localQuantities[el.id] === undefined);
+        const newQuantities = Object.fromEntries(newItems.map((el) => [el.id, 1]));
 
-            return updatedQuantities;
-        });
+        setLocalQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            ...newQuantities
+        }));
+    }, [items]);
+
+    const handleIncrement = (id) => {
+        setLocalQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [id]: (prevQuantities[id] || 0) + 1
+        }));
     };
 
     const handleDecrement = (id) => {
         setLocalQuantities((prevQuantities) => {
             const updatedQuantities = {
                 ...prevQuantities,
-                [id]: Math.max((prevQuantities[id] || 0) - 1, 0),
+                [id]: Math.max((prevQuantities[id] || 0) - 1, 0)
             };
 
             if (updatedQuantities[id] === 0) {
-                delete updatedQuantities[id];
+                const { [id]: removed, ...rest } = updatedQuantities;
                 dispatch(deleteItemFromCart(id));
+                return rest;
             }
 
             return updatedQuantities;
@@ -46,15 +71,48 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
     };
 
     const handleOrder = () => {
-        const orderData = Object.entries(localQuantities).map(([id, quantity]) => ({ id, quantity }));
+        setLoading(true);
 
-        axios.post('/', orderData)
-            .then(response => {
-                console.log('Order placed successfully:', response.data);
-            })
-            .catch(error => {
-                console.error('Error placing order:', error);
-            });
+        if (decor.phone) {
+            setDecorVisablet({ ...decor, phoneVisablet: false });
+        } else {
+            setDecorVisablet({ ...decor, phoneVisablet: true });
+        }
+
+        if (decor.name && decor.phone) {
+            const orderData = items.map((el) => ({
+                id: Number(el.id),
+                count: localQuantities[el.id] || 0,
+                title: el.title,
+                size: el.size
+            }));
+
+            const dataNew = {
+                products: orderData,
+                name: decor.name,
+                phone: decor.phone
+            };
+
+            axios.post(url + '/buy/', dataNew)
+                .then(response => {
+                    if (response.data.response) {
+                        dispatch(deleteItemFrom([]));
+                        navigate("/");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error placing order:', error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        } else if (decor.name === "") {
+            setDecorVisablet({ ...decor, nameVisablet: true });
+            setLoading(false);
+        } else if (decor.phone === "") {
+            setDecorVisablet({ ...decor, phoneVisablet: true });
+            setLoading(false);
+        }
     };
 
     return (
@@ -89,7 +147,7 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
                                         <div className="plus" onClick={() => handleIncrement(el.id)}>
                                             +
                                         </div>
-                                        <p>{localQuantities[el.id] || 0}</p>
+                                        <p>{localQuantities[el.id] || ""}</p>
                                         <div className="minus" onClick={() => handleDecrement(el.id)}>
                                             -
                                         </div>
@@ -102,11 +160,13 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
                         <h1>Ваш заказ</h1>
                         <div className="input_box">
                             <label>Ваше имя</label>
-                            <input type="text" placeholder='' />
+                            <input value={decor.name} onChange={(e) => setDecor({ ...decor, name: e.target.value })} type="text" placeholder='' />
+                            {decorVisablet.nameVisablet && <p className='red'>Введите имя!</p>}
                         </div>
                         <div className="input_box">
                             <label>Ваш телефон</label>
-                            <input type="text" placeholder='' />
+                            <input value={decor.phone} onChange={(e) => setDecor({ ...decor, phone: e.target.value })} type="text" placeholder='' />
+                            {decorVisablet.phoneVisablet && <p className='red'>Введите номер!</p>}
                         </div>
                     </div>
                 </div>
@@ -119,16 +179,15 @@ const Decor = ({ localQuantities, setLocalQuantities }) => {
                     )}
                 </div>
                 <button
-                    disabled={totalPrice > 0 ? false : true}
+                    disabled={totalPrice == 0 ? false : true}
                     onClick={handleOrder}
                     className='button_form_detailed'
                 >
-                    Заказать
+                    {loading ? <Loading /> : "Заказать"}
                 </button>
             </div>
         </div>
     );
-}
+};
 
-// Memoize the Decor component to prevent unnecessary re-renders
 export default React.memo(Decor);

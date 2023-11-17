@@ -122,6 +122,9 @@ const Order = () => {
                                         })}
                                     </p>
                                     : ""}
+                                {data.size &&
+                                    <p className='content_p'>Размеры:{data.size}</p>
+                                }
                             </div>
                         </div>
                     </div>

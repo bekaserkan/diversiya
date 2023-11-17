@@ -31,7 +31,10 @@ const Head = () => {
           <a href="#delivery"><h2>Доставка</h2></a>
         </div>}
         <div className="head_contant">
-          <div className="head_block"></div>
+          <div className="head_block">
+            <h2>Платья от производителя ''Diversiya''это - эксклюзивные платья, которые отличаются уникальным стилем,идеальной посадкой и роскошью</h2>
+            <a href="#catalog">Посмотреть каталог</a>
+          </div>
           <div className="head_image_one"></div>
           <div className="head_image_two"></div>
           <div className="head_image_three"></div>

@@ -166,8 +166,31 @@ a {
   margin-top: 30px;
   margin-left: auto;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 60vh;
   background: url("https://thumb.tildacdn.com/tild6163-3830-4935-b739-636531326536/-/format/webp/_.png") no-repeat center / cover;
+}
+
+.head .head_block h2 {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 300px;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.head .head_block a {
+  margin-left: 100px;
+  margin-top: 90px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  border: 2px solid;
+  padding: 10px;
 }
 
 @keyframes frist {
@@ -667,6 +690,13 @@ button {
   font-weight: 600;
 }
 
+.red {
+  margin-top: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  color: red;
+  text-align: end;
+}
 
 @media (max-width: 950px) {
 
@@ -732,6 +762,10 @@ button {
     font-size: 30px;
     font-weight: 500;
   }
+
+  .head .head_block {
+    height: 40vh;
+  }
 }
 
 @media (max-width: 650px) {
@@ -777,10 +811,26 @@ button {
   }
 
   .head .head_block {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-left: auto;
-    width: 80%;
-    height: 20vh;
+    width: 95%;
+    height: 25vh;
+  }
+
+  .head .head_block h2 {
+    margin-top: 5px;
+    margin-left: 10%;
+    width: 150px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .head .head_block a {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 9px;
+    padding: 5px;
+
   }
 
   /* Catalog */
@@ -810,7 +860,13 @@ button {
     margin-top: 10px;
     font-size: 16px;
     font-weight: 400;
+    line-height: 1;
     color: var(--black);
+  }
+
+  .content_h1.r {
+    height: 35px;
+    overflow: hidden;
   }
 
   .content_p {

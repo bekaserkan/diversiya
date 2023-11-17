@@ -1,1 +1,1 @@
-export const url = "https://nurbektmusic.pythonanywhere.com"
+export const url = "http://109.172.83.208:8000"
